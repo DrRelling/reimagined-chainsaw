@@ -1,18 +1,18 @@
 const codes = [
-    "U2FsdGVkX1/1FPXWyhERNsjF3kKTF/xM0bIkZQb2XZQ=",
+    "U2FsdGVkX1+jblKeO+0+k+FX8brzkpaAhUpEeoB/7Do=",
     "U2FsdGVkX1/d7Gs16gsekao/gXgCTFkOKP1qaUSlEqk=",
-    "U2FsdGVkX1/kEfobAzTMz82V7xcbUImIzy8Mw4Kz4PU="
+    "U2FsdGVkX1/GK3nHB9D67fYMZDmRoP6ITLRE6tOjw2M="
 ];
 
 const correctKeys = JSON.parse(localStorage.getItem("correct_keys") || "[null, null, null]");
 if (correctKeys[0] !== null) {
-    document.getElementById("first-part").innerHTML = correctKeys[0];
+    document.getElementById("part0").innerHTML = correctKeys[0];
 }
 if (correctKeys[1] !== null) {
-    document.getElementById("second-part").innerHTML = correctKeys[1];
+    document.getElementById("part1").innerHTML = correctKeys[1];
 }
 if (correctKeys[2] !== null) {
-    document.getElementById("third-part").innerHTML = correctKeys[2];
+    document.getElementById("part2").innerHTML = correctKeys[2];
 }
 
 function encrypt(secret, key) {
@@ -20,33 +20,24 @@ function encrypt(secret, key) {
 }
 
 function decrypt(secret, key) {
-    const bytes = CryptoJS.AES.decrypt(secret, JSON.stringify(key));
-    return bytes.toString(CryptoJS.enc.Utf8);
+    try {
+        const bytes = CryptoJS.AES.decrypt(secret, JSON.stringify(key));
+        return bytes.toString(CryptoJS.enc.Utf8);
+    } catch (ex) {
+        console.error(ex);
+        return "";
+    }
 }
 
-function testKey(key) {
+function testKey(key, idx) {
     key = key.toUpperCase();
-    const firstCode = decrypt(codes[0], key);
-    const secondCode = decrypt(codes[1], key);
-    const thirdCode = decrypt(codes[2], key);
 
-    if (firstCode != "") {
-        if (correctKeys[0] === null) {
-            correctKeys[0] = firstCode;
+    const code = decrypt(codes[idx], key);
+    if (code !== "" && /^[A-Z0-9]*$/.test(code)) {
+        if (correctKeys[idx] === null) {
+            correctKeys[idx] = code;
             localStorage.setItem("correct_keys", JSON.stringify(correctKeys));
         }
-        document.getElementById("first-part").innerHTML = firstCode;
-    } else if (secondCode != "") {
-        if (correctKeys[1] === null) {
-            correctKeys[1] = secondCode;
-            localStorage.setItem("correct_keys", JSON.stringify(correctKeys));
-        }
-        document.getElementById("second-part").innerHTML = secondCode;
-    } else if (thirdCode != "") {
-        if (correctKeys[2] === null) {
-            correctKeys[2] = thirdCode;
-            localStorage.setItem("correct_keys", JSON.stringify(correctKeys));
-        }
-        document.getElementById("third-part").innerHTML = thirdCode;
+        document.getElementById("part" + idx).innerHTML = code;
     }
 }

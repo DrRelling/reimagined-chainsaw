@@ -11,14 +11,15 @@
   <div class="container">
     <p class="centre-text">Happy birthday, Mark!</p>
     <p class="centre-text">
-      Enter the answers in the box below to get (most of) your present :)
+      Enter the answers in the boxes below to get (most of) your present :)
     </p>
-    <input oninput="testKey(this.value)" />
+    <div class="inputs">
+      <input oninput="testKey(this.value, 0)" />
+      <input oninput="testKey(this.value, 1)" />
+      <input oninput="testKey(this.value, 2)" />
+    </div>
     <p class="centre-text">
-      <span id="first-part">...</span>-<span id="second-part">...</span>-<span
-        id="third-part"
-        >...</span
-      >
+      <span id="part0">...</span>-<span id="part1">...</span>-<span id="part2">...</span>
     </p>
     <p class="centre-text">
       Any revealed parts of the code will be saved automatically if you need to
