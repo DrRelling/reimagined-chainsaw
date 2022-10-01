@@ -1,0 +1,29 @@
+<head>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+    integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <link href="./style.css" rel="stylesheet" />
+</head>
+<body class="main">
+  <div class="container">
+    <p class="centre-text">Happy birthday, Mark!</p>
+    <p class="centre-text">
+      Enter the answers in the box below to get (most of) your present :)
+    </p>
+    <input oninput="testKey(this.value)" />
+    <p class="centre-text">
+      <span id="first-part">...</span>-<span id="second-part">...</span>-<span
+        id="third-part"
+        >...</span
+      >
+    </p>
+    <p class="centre-text">
+      Any revealed parts of the code will be saved automatically if you need to
+      come back later.
+    </p>
+  </div>
+  <script src="./script.js"></script>
+</body>

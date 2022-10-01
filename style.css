@@ -1,0 +1,19 @@
+.main {
+    align-items: center;
+    background-color: black;
+    color: green;
+    display: flex;
+    font-family: 'Courier New', Courier, monospace;
+    height: 100%;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.centre-text {
+    text-align: center;
+}
